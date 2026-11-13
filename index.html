@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seeds Hangout Attendance</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;padding:16px;background:#fff;color:#111}
+h1{font-size:20px;margin:0 0 4px}#c{font-size:15px;color:#555;margin-bottom:12px}
+label{display:flex;align-items:center;gap:12px;padding:14px 10px;border-bottom:1px solid #eee;font-size:17px}
+label.on{background:#e8f7ec}input{width:24px;height:24px}
+small{color:#999}button{margin-top:16px;padding:12px;width:100%;font-size:16px}
+</style></head><body>
+<h1>Seeds Hangout: who's here</h1><div id="c"></div><div id="l"></div>
+<button onclick="if(confirm('Clear all ticks?')){localStorage.removeItem('att');d();}">Clear all</button>
+<script>
+const N=["Favour David","John Oluwamuyiwa Sule","Daniel Rejoice","Saturday Anthony","Anita Peter","Abigwa Ehi Veracious","Yange Avershima Blessing","Yange Ashidoon Glory","Olakunle James","Laye Favour","Atawodi Ojoma Abigail","Sams Blissful Chigozirim","Israel Owowo (Maybe)","Favour Oluwapelumi Oni","Oni Precious Mosunmola","Oni Believeth Oluwatobi","Temitope Mayowa Joshua","Darasimi Olu","Racheal","Amosu Anuoluwapo","El-Praise Ayo","James Jude","Anikwue Authority","Anikwue Divine","Rejoice Patrick (Maybe)","Favour Foluwasho","Omotola Olukayode","Daniel Praise","Agu Divine","Chukwuemeka Agu","Akawu Ojima Peculiar","Taiwo Oluwatobiloba Emmanuella","Okpara Divine Chioma"];
+let s=JSON.parse(localStorage.getItem('att')||'{}');
+function d(){s=JSON.parse(localStorage.getItem('att')||'{}');const l=document.getElementById('l');l.innerHTML='';let n=0;
+N.forEach((x,i)=>{const on=!!s[i];if(on)n++;const e=document.createElement('label');e.className=on?'on':'';
+e.innerHTML='<input type="checkbox" '+(on?'checked':'')+'><span>'+(i+1)+'. '+x+'</span>';
+e.querySelector('input').onchange=ev=>{s[i]=ev.target.checked;localStorage.setItem('att',JSON.stringify(s));d();};l.appendChild(e);});
+document.getElementById('c').textContent=n+' here, '+(N.length-n)+' not here (of '+N.length+')';}
+d();
+</script></body></html>
